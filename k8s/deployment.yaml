@@ -1,0 +1,24 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: embedding-model-deployment
+  namespace: semantic-search
+  labels:
+    app: embedding-model
+spec:
+  selector:
+    matchLabels:
+      app: embedding-model
+  replicas: 1
+  revisionHistoryLimit: 1
+  template:
+    metadata:
+      labels:
+        app: embedding-model
+    spec:
+      containers:
+      - name: embedding-model
+        image: semantic-search-embedding-model:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8090

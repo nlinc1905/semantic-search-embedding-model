@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: embedding-model-service
+  namespace: semantic-search
+spec:
+  type: ClusterIP
+  selector:
+    app: embedding-model
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8090
