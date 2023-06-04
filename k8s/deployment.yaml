@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name: embedding-model
-        image: semantic-search-embedding-model:latest
-        imagePullPolicy: Never
+        image: us-central1-docker.pkg.dev/queryable-docs-dev/queryable-docs-docker-repository/semantic-search-embedding-model:latest
+        # image: semantic-search-embedding-model:latest
+        # imagePullPolicy: Never
         ports:
         - containerPort: 8090
