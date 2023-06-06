@@ -1,7 +1,7 @@
 import typing as t
 import json
 import torch
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi_health import health
 from pydantic import BaseModel
 
@@ -47,9 +47,9 @@ def is_alive(session: bool = Depends(get_session)):
 
 
 # health check endpoints for K8s probes
-app.add_api_route('/health_start', health([is_start])
-app.add_api_route('/heath_ready', health([is_ready])
-app.add_api_route('/health_alive', health([is_alive])
+app.add_api_route('/health_start', health([is_start]))
+app.add_api_route('/heath_ready', health([is_ready]))
+app.add_api_route('/health_alive', health([is_alive]))
 
 
 @app.post("/embed")
