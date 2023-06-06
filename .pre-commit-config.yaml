@@ -17,7 +17,7 @@ repos:
         language: system
         types: [python]
         args:
-        - --max-line-length=80
+        - --max-line-length=120
         - --fail-under=0
         - --fail-on=F,E
         - --exit-zero

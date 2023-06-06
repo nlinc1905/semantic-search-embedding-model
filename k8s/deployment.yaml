@@ -22,4 +22,21 @@ spec:
         # image: semantic-search-embedding-model:latest
         # imagePullPolicy: Never
         ports:
-        - containerPort: 8090
+        - name: serviceport
+          containerPort: 8090
+        readinessProbe:
+          httpGet:
+            path: /health_ready
+            port: serviceport
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health_alive
+            port: serviceport
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 5
+

@@ -1,4 +1,5 @@
 fastapi==0.95.1
+fastapi-health==0.4.0
 httpx==0.24.0
 pre-commit==3.3.2
 pylint==2.17.4

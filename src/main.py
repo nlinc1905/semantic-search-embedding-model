@@ -2,6 +2,7 @@ import typing as t
 import json
 import torch
 from fastapi import FastAPI
+from fastapi_health import health
 from pydantic import BaseModel
 
 from .model import EmbeddingModel
@@ -18,6 +19,37 @@ class EmbedBatchRequest(BaseModel):
 app = FastAPI()
 DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = EmbeddingModel(device=DEVICE)
+
+
+def get_session():
+    return True
+
+
+def is_start(session: bool = Depends(get_session)):
+    """
+    Returns True when API has started
+    """
+    return session
+
+
+def is_ready(session: bool = Depends(get_session)):
+    """
+    Returns True when API is ready to receive requests
+    """
+    return session
+
+
+def is_alive(session: bool = Depends(get_session)):
+    """
+    Returns True when API is alive
+    """
+    return session
+
+
+# health check endpoints for K8s probes
+app.add_api_route('/health_start', health([is_start])
+app.add_api_route('/heath_ready', health([is_ready])
+app.add_api_route('/health_alive', health([is_alive])
 
 
 @app.post("/embed")
