@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: embedding-model-deployment
   namespace: semantic-search
@@ -20,24 +20,8 @@ spec:
       - name: embedding-model
         image: us-central1-docker.pkg.dev/queryable-docs-dev/queryable-docs-docker-repository/semantic-search-embedding-model:latest
         # image: semantic-search-embedding-model:latest
-        # imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
         - name: serviceport
           containerPort: 8080
           protocol: TCP
-#        readinessProbe:
-#          httpGet:
-#            path: /health_ready
-#            port: serviceport
-#          initialDelaySeconds: 120
-#          periodSeconds: 30
-#          timeoutSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /health_alive
-            port: serviceport
-          initialDelaySeconds: 60
-          periodSeconds: 30
-          timeoutSeconds: 10
-          failureThreshold: 5
-

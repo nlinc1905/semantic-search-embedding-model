@@ -20,9 +20,9 @@ DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = EmbeddingModel(device=DEVICE)
 
 
-# health check endpoint for K8s probes
 @app.get("/")
 async def root():
+    """Health check endpoint for K8s probes"""
     return {"message": "It's alive!"}
 
 
