@@ -3,14 +3,22 @@ apiVersion: networking.k8s.io/v1
 metadata:
   name: embedding-model-ingress
   namespace: semantic-search
+  annotations:
+    kubernetes.io/ingress.class: "gce"
 spec:
-  rules:
-  -  http:
-      paths:
-      - path: "/"
-        pathType: Prefix
-        backend:
-          service:
-            name: embedding-model-service
-            port:
-              number: 80
+  defaultBackend:
+    service:
+      name: embedding-model-service
+      port: 
+        number: 8080
+#   rules:
+#  -  http:
+#      paths:
+#      - path: "/"
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: embedding-model-service
+#            port:
+#              number: 80
+

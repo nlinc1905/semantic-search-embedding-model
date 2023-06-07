@@ -6,6 +6,11 @@ from src.main import app
 client = TestClient(app)
 
 
+def test_root():
+    response = client.get("/")
+    assert response.status_code == 200
+
+
 def test_embed():
     text = "string"
     response = client.post("/embed", json={

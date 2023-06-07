@@ -4,10 +4,10 @@ metadata:
   name: embedding-model-service
   namespace: semantic-search
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: embedding-model
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 8090
+      port: 8080
+      targetPort: 8080
